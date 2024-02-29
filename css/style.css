@@ -7,6 +7,10 @@
     text-decoration: none;
     list-style: none;
 }
+a{
+    text-decoration: none;
+}
+
 .swal2-tiny {
     font-size: 12px !important;
 }
@@ -322,8 +326,7 @@ text-align: center;
 }
 
 .footer{
-    display: flex;
-    padding: 30px 0; 
+    color: white;
 }
 
 .link{
@@ -545,3 +548,4 @@ text-align: center;
         width: 1000%;
     }
 } */
+
