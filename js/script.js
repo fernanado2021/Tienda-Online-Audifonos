@@ -87,7 +87,7 @@ function leerDatosElemento(elemento){
     insertarCarrito(infoElemento);
 }
 
-function insertarCarrito(elemento){
+function insertarCarrito(elemento) {
     const row = document.createElement('tr');
     row.innerHTML = `
         <td>
@@ -96,7 +96,7 @@ function insertarCarrito(elemento){
         <td>
             ${elemento.titulo}
         </td>
-        <td>
+        <td class="precio">
             ${elemento.precio}
         </td>
         <td>
@@ -104,7 +104,30 @@ function insertarCarrito(elemento){
         </td>
     `;
     lista.appendChild(row);
+    mostrarTotalPrecio();
     mostrarAlerta('Elemento agregado al carrito', 'success');
+
+    const price = parseFloat(elemento.precio.replace('$', ''));
+    localStorage.setItem(`producto-${elemento.id}`, JSON.stringify(elemento));
+    mostrarAlerta(`Se ha guardado el producto ${elemento.titulo} en el carrito`, 'success');
+}
+
+
+function calcularTotalCarrito() {
+    let total = 0;
+    const rows = document.querySelectorAll('#lista-carrito tbody tr');
+
+    rows.forEach((row) => {
+        const price = row.querySelector('.precio').textContent.replace('$', '');
+        total += parseFloat(price);
+    });
+
+    return total;
+}
+
+function mostrarTotalPrecio() {
+    const total = calcularTotalCarrito();
+    document.querySelector('#total-carrito').textContent = `Total: $${total.toFixed(2)}`;
 }
 
 function eliminarElemento(e) {
@@ -116,6 +139,7 @@ function eliminarElemento(e) {
         elemento = e.target.parentElement.parentElement;
         elementoId = elemento.querySelector('a').getAttribute('data-id');
     }
+    mostrarTotalPrecio();
     mostrarAlerta('Elemento eliminado del carrito', 'error');
 }
 
@@ -123,6 +147,7 @@ function vaciarCarrito(){
     while (lista.firstChild) {
         lista.removeChild(lista.firstChild);
     }
+    mostrarTotalPrecio();
     mostrarAlerta('Carrito vaciado', 'warning');
     return false;
 }

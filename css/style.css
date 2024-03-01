@@ -146,6 +146,14 @@ th, td{
     color: #feffff;
 }
 
+/* Style the total row */
+#total-carrito {
+    font-weight: bold;
+    text-align: right; /* Align text to the right in the total row */
+    padding: 10px; /* Add padding for better spacing */
+}
+
+
 .borrar{
     background-color: #7270ec;
     border-radius: 50%;
