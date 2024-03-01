@@ -48,7 +48,7 @@ function mostrarAlerta(mensaje, tipo) {
         position: 'top-end',
         toast: true,
         showConfirmButton: false,
-        timer: 3000,
+        timer: 500,
         customClass: {
             popup: 'swal2-tiny',
             content: 'swal2-tiny-content',
